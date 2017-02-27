@@ -198,7 +198,7 @@ namespace Hook
                     
                     //Ecuación de la recta --> y = mx + b;
                     decimal m = (decimal)(targetPos.posY - currentPos.posY) / (decimal)(targetPos.posX - currentPos.posX); //Hallamos m
-                    decimal b = m * currentPos.posX - currentPos.posY; //Hallamos b
+                    decimal b = -m * currentPos.posX + currentPos.posY; //Hallamos b
 
                     decimal x = currentPos.posX;
                     decimal y = m * x + b;
