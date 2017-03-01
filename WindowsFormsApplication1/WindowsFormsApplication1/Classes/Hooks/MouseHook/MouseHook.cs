@@ -180,7 +180,7 @@ namespace Hook
             return moveToPoint(target.posX, target.posY);
         }
         //
-        public void moveToPointHumanized( POINT targetPos, int margen)
+        public void moveToPointHumanized( POINT targetPos)
         {
             if (!stopPropagation) //Para evitar que se puedan crear 2 o mas hilos interactuand ocon el raton
             {
@@ -202,6 +202,7 @@ namespace Hook
 
                     decimal x = currentPos.posX;
                     decimal y = m * x + b;
+                    decimal X = (y - b) / m; 
 
                     //Cuanto tiene que valer x para que y sea igual a targetPos.posY;
                     // y = m * x + b --> (y-b)/m
@@ -212,7 +213,7 @@ namespace Hook
                     instance.stopPropagation = true;
                     while ( !margenArea.isInArea(currentPos) )
                     {
-                        currentPos = new POINT(Math.Abs(x), Math.Abs(y));
+                        currentPos = new POINT(x, y);
                         this.moveToPoint(currentPos);
                         milisegundosPasados += 1;
                         System.Threading.Thread.Sleep(1);

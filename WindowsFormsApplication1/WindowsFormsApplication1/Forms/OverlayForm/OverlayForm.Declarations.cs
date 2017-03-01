@@ -35,8 +35,8 @@ namespace OverlayDrawingTest
 
         delegate void SetIntsCallback(int top, int left); //Necesario para la modificacion de parametros atraves de distintos hilos
 
-        IWindowListener comunicador;
-        IntPtr handlerTarget;
+        IComunicator chivatoPadre = null;
+        IntPtr handlerTarget = IntPtr.Zero;
         RECT windowTargetRect;
         RECT ctrlTargetRect {
             get
@@ -49,10 +49,10 @@ namespace OverlayDrawingTest
                 this.adjust();
             }
         }
-        bool working;
+        bool working = false;
         //Graphics g; //¿PARA QUE?
-        Pen lapiz;
-        private WindowHook hookWindow;
+        Pen lapiz = null;
+        private WindowHook hookWindow = null;
 
         #endregion Properties
 

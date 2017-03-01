@@ -1,6 +1,8 @@
 ﻿using Hook;
 using Interfaces;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -13,6 +15,7 @@ namespace OverlayDrawingTest
 
         public Formulario()
         {
+            chivatoHijos = new List<IComunicator>();
             InitializeComponent();
         }
 
@@ -20,8 +23,11 @@ namespace OverlayDrawingTest
 
         private void initOverlay()
         {
-            comunicador = WindowListener.getInstance(this);
-            overlay = new OverlayForm(comunicador, handlerFounded);
+
+            IComunicator chivato = Comunicator.getInstance(this, true);
+            chivatoHijos.Add(chivato);
+            overlayProcess = new OverlayForm(chivato, handlerFounded);
+            overlayProcess.init();
         }
         private void init()
         {
@@ -33,8 +39,27 @@ namespace OverlayDrawingTest
 
             IMouseEventsListener escuchadorRaton = MouseEventListener.getInstance(this);
             hookRaton =  MouseHook.getInstance(escuchadorRaton);
+
+            listaProcesosForm = new WindowsFormsApplication1.Forms.ProcessListForm();
+            //listaProcesosForm.Show();
+            /*
+            foreach ( Process proc in Process.GetProcesses() ){
+                try
+                {
+                    using (ProcessModule curModule = proc.MainModule)
+                    {
+                        Trace.WriteLine(curModule.FileName);
+                    }
+                }
+                catch(Win32Exception e)
+                {
+                    Trace.WriteLine("Ha ocurrido un error intentando leer un proceso. Error("+e.NativeErrorCode+") = "+e.Message);
+                }
+                
+            }*/
+            //this.overlayDebugging = new OverlayForm(null, IntPtr.Zero);
         }
-        private IntPtr findWindow(string windowName, int secondsToWait)
+        private void findWindow(string windowName, int secondsToWait)
         {
             richTextBox_Debug.ResetText();
             richTextBox_Debug.AppendText("------------------------------------------------\n");
@@ -51,14 +76,19 @@ namespace OverlayDrawingTest
                     seconds += 1;
                     this.appendText(richTextBox_Debug, "Searching process with window title --> " + windowName);
                     hWnd = FindWindow(null, windowName);
-                    
+                    if (hWnd != IntPtr.Zero) break;
                 }
-                if(hWnd != IntPtr.Zero) this.appendText(richTextBox_Debug, "Se ha encontrado un proceso con nombre -->" + windowName);
+                if (hWnd != IntPtr.Zero)
+                {
+                    this.appendText(richTextBox_Debug, "Se ha encontrado un proceso con nombre -->" + windowName);
+                    this.handlerFounded = hWnd;
+                }
                 else this.appendText(richTextBox_Debug, "NO se ha encontrado un proceso con nombre -->" + windowName);
                 loadingForm(true);
+
+                buttonBuscar_Click(Thread.CurrentThread, null);
             }).Start();
             
-            return hWnd;
         }
 
         private void loadingForm(bool end)
@@ -98,25 +128,34 @@ namespace OverlayDrawingTest
             this.buttonBuscar.Enabled = false;
             if (this.checkBoxOverlay.Checked)
             {
-                if (overlay.IsDisposed) initOverlay();
-                overlay.Show();
+                if (overlayProcess.IsDisposed) initOverlay();
+                overlayProcess.Show();
             }
             else
             {
-                overlay.Hide();
+                overlayProcess.Hide();
             }
         }
       
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            handlerFounded = findWindow(this.textBoxWindowNameTarget.Text, 5);
-            if (handlerFounded != IntPtr.Zero)
+            if( ! (sender is Thread) ) findWindow(this.textBoxWindowNameTarget.Text, 5);
+            else //Significa que estamos llamandolo desde el hilo buscador
             {
-                this.checkBoxOverlay.Visible = true;
-                MessageBox.Show("Se ha encontrado el proceso con titulo ' "+ this.textBoxWindowNameTarget.Text +" ' " );
-                initOverlay();
+                if (this.InvokeRequired) this.Invoke(new System.EventHandler(this.buttonBuscar_Click), Thread.CurrentThread, null);
+                else
+                {
+                    if (handlerFounded != IntPtr.Zero)
+                    {
+                        this.checkBoxOverlay.Visible = true;
+                        MessageBox.Show("Se ha encontrado el proceso con titulo ' " + this.textBoxWindowNameTarget.Text + " ' ");
+                        initOverlay();
+                    }
+                    else this.checkBoxOverlay.Visible = false;
+                }
+                
             }
-            else this.checkBoxOverlay.Visible = false;
+           
         }
 
 

@@ -55,7 +55,7 @@
             this.textBoxWindowNameTarget.Name = "textBoxWindowNameTarget";
             this.textBoxWindowNameTarget.Size = new System.Drawing.Size(170, 20);
             this.textBoxWindowNameTarget.TabIndex = 1;
-            this.textBoxWindowNameTarget.Text = "Administrador de tareas";
+            this.textBoxWindowNameTarget.Text = "Calculadora";
             this.textBoxWindowNameTarget.TextChanged += new System.EventHandler(this.textBoxWindowNameTarget_TextChanged);
             // 
             // labelWindowName

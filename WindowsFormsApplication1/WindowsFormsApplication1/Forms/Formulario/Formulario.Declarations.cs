@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Forms;
+using static Structs.Commons;
 
 namespace OverlayDrawingTest
 {
@@ -27,19 +29,22 @@ namespace OverlayDrawingTest
         private delegate void AppendTextCallback(RichTextBox textarea, string content);
         AppendTextCallback ptrCallbackAppendText = null;
 
-        private OverlayForm overlay = null;
-        private IWindowListener comunicador = null;
+        private OverlayForm overlayProcess = null;
+        private OverlayForm overlayDebugging = null;
+        private ProcessListForm listaProcesosForm = null;
+
+        private List<IComunicator> chivatoHijos = null;
         private IntPtr handlerFounded = IntPtr.Zero;
         private KeyBoardHook hookTeclado = null;
         private MouseHook hookRaton = null;
 
         #endregion Parameters
 
-        #region WindowListener
-        private class WindowListener : IWindowListener
+        #region EventsListener
+        private class Comunicator : IComunicator
         {
             private Formulario self;
-            private static IWindowListener instance;
+            private static IComunicator instance;
 
             /// <summary>
             /// Crea un nuevo segmento en la memoria si la instancia del objeto no ha sido creado anteriormente.
@@ -47,11 +52,11 @@ namespace OverlayDrawingTest
             /// </summary>
             /// <param name="formulario">Formulario a la que se le chivara los cambios de estado de OverlayForm</param>
             /// <returns>IFormListener</returns>
-            public static IWindowListener getInstance(Formulario formulario)
+            public static IComunicator getInstance(Formulario formulario, bool nuevo)
             {
                 if (instance == null)
                 {
-                    instance = new WindowListener(formulario);
+                    instance = new Comunicator(formulario);
                     return instance;
                 }
                 else
@@ -59,8 +64,8 @@ namespace OverlayDrawingTest
                     return instance;
                 }
             }
-
-            private WindowListener(Formulario formulario)
+            
+            private Comunicator(Formulario formulario)
             {
                 self = formulario;
             }
@@ -77,7 +82,7 @@ namespace OverlayDrawingTest
         }
 
 
-        #endregion WindowListener
+        #endregion EventsListener
 
         #region Hooks
 
@@ -107,7 +112,7 @@ namespace OverlayDrawingTest
                 if (pressedKey.Equals(Keys.D))
                 {
                     //self.hookRaton.moveToPoint(100, 100); 
-                   // self.hookRaton.moveToPointHumanized(new MouseHook.POINT(100, 100), 6);
+                    self.hookRaton.moveToPointHumanized(new POINT(100, 100));
                     return true;
                     //return ((KeyBoardHook)sender).replaceKey(Keys.B);
                 }

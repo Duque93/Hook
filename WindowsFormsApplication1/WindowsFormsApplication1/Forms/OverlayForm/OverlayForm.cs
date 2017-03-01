@@ -16,23 +16,24 @@ namespace OverlayDrawingTest
         /// 
         /// </summary>
         /// <param name="listener">Se ocupara de informar al padre de los cambios de estado en el overlay</param>
-        public OverlayForm(IWindowListener comunicador, IntPtr handlerTarget)
+        public OverlayForm(IComunicator chivatoPadre, IntPtr handlerTarget)
         {
             InitializeComponent();
-            this.comunicador = comunicador;
+            this.chivatoPadre = chivatoPadre;
             this.handlerTarget = handlerTarget;
-
-            init();
+            
         }
 
         #region Methods
-        private void init()
+        public void init()
         {
+            if (working) throw new Exception("La clase ya ha sido inicializada");
+            working = true;
             lapiz = new Pen(Color.Red);
 
             IWindowEventListener escuchadorTeclado = WindowEventListener.getInstance(this);
-            hookWindow = new WindowHook(this.handlerTarget, escuchadorTeclado);
-            working = true;
+            hookWindow = new WindowHook(this.handlerTarget, escuchadorTeclado); //Bug, simplemente no tengo permiso para instalar un hook en un proceso especifico.
+            
 
             /*
             new Thread //Este hilo en segundo plano se encarga de ir consultando el tamaño de la ventana objetivo y en caso de existir modificación, notificarnoslo
@@ -79,7 +80,7 @@ namespace OverlayDrawingTest
                 //por otro proceso ya que ahora se le avisa de que otro le va a modificar el objeto. Antes no tenia manera de darse cuenta
                 //Es semejante al synchronized de JAVA.
                 SetIntsCallback d = setWindowPos; //Es necesario crear un objeto de tipo delegate para lo siguiente:
-                this.Invoke(d, new object[] { top, left }); //Llama de manera procedural a una función dentro de la clase.1º arg-->callback,2ºarg-->argumentos
+                this.Invoke(d,  top, left ); //Llama de manera procedural a una función dentro de la clase.1º arg-->callback,2ºarg-->argumentos
             }
             else
             {
@@ -117,7 +118,7 @@ namespace OverlayDrawingTest
         private void Overlay_FormClosing(object sender, FormClosingEventArgs e)
         {
             working = false;
-            comunicador.closingWindow();
+            chivatoPadre.closingWindow();
         }
 
         private void OverlayForm_Paint(object sender, PaintEventArgs e)

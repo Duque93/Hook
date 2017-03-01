@@ -430,7 +430,7 @@ namespace Hook
         private uint pID = 0;
 
 
-        public WindowHook(IntPtr hwndTarget, IWindowEventListener manejadorEventos) : base(HookType.WH_CALLWNDPROCRET)
+        public WindowHook(IntPtr hwndTarget, IWindowEventListener manejadorEventos) : base(HookType.WH_CALLWNDPROC)
         {
             this.manejadorEventos = manejadorEventos;
             base.childProcedure = new hookHandler(hookCallback);
@@ -456,8 +456,8 @@ namespace Hook
 
                     }
                     Trace.WriteLine("FOUNDED HANDLER ADRESS = " + handler.ToString());
-                    base.init(handler, 0 );
-                    //base.init(IntPtr.Zero, this.pID);
+                    base.init(handler, 0);
+                   // base.init(IntPtr.Zero, 0);
                 }
             }
             catch(Win32Exception e)
