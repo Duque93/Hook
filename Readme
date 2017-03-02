@@ -1,0 +1,23 @@
+DONE:
+1. Desarrollar mi primer overlay
+2. Instalar Hook para poder leer información enviada desde mi teclado asi como modificarla/simularla
+3. Listar procesos funcionando dentro de mi sistema
+4. Crear una ventana de detalles para cada proceso
+5. Listar modulos cargados por el proceso
+6. Listar puertos abiertos por el proceso
+7. Humanizar el movimiento del raton automatizado (1º fase).
+
+TODO:
+1. Identificar que puertos han sido porque Modulos.
+2. Capacidad de recoger datos enviados/recibidos de cada puerto TCP/UDP (local sniffing).
+3. Capacidad de buscar datos directamente en memoria.
+4. Terminar de desarrollar mi overlay para "debugging visual" de Mousehook.
+5. "Humanizar" movimiento del ratón aun mas mediante una funcion del stilo y = sin(x) + x +b (teoria).
+6. Agregar capacidad de inyección de procesos en memoria manejada de otro proceso.
+7. Hacer funcionar de una vez mi WindowHook para procesos especificos.
+8. Interceptar Output y OutputError enviado a consola de cada proceso.
+9. Empezar a trabajar en un sistema de reconimiento de voz (larguisimo plazo y solo mi voz).
+10. Empezar a trabajar en un sistema de reconocimiento de imagenes  (larguisimo plazo).
+11. Cualquier otra cosa que se me venga a la cabeza.
+
+
