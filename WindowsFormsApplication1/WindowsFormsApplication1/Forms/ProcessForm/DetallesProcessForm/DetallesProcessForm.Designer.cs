@@ -30,23 +30,27 @@
         {
             this.tabContenidoDetalles = new System.Windows.Forms.TabControl();
             this.localDetailsTab = new System.Windows.Forms.TabPage();
-            this.tabModulos = new System.Windows.Forms.TabPage();
-            this.labelBasePriorityData = new System.Windows.Forms.Label();
-            this.labelHandlersData = new System.Windows.Forms.Label();
-            this.labelOutput = new System.Windows.Forms.Label();
-            this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
-            this.labelErrorOutput = new System.Windows.Forms.Label();
             this.richTextBoxErrorOutput = new System.Windows.Forms.RichTextBox();
+            this.labelErrorOutput = new System.Windows.Forms.Label();
+            this.richTextBoxOutput = new System.Windows.Forms.RichTextBox();
+            this.labelOutput = new System.Windows.Forms.Label();
+            this.labelHandlersData = new System.Windows.Forms.Label();
+            this.labelBasePriorityData = new System.Windows.Forms.Label();
+            this.tabModulos = new System.Windows.Forms.TabPage();
             this.listViewModules = new System.Windows.Forms.ListView();
+            this.tabPageNetWorkInfo = new System.Windows.Forms.TabPage();
+            this.listViewNetwork = new System.Windows.Forms.ListView();
             this.tabContenidoDetalles.SuspendLayout();
             this.localDetailsTab.SuspendLayout();
             this.tabModulos.SuspendLayout();
+            this.tabPageNetWorkInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabContenidoDetalles
             // 
             this.tabContenidoDetalles.Controls.Add(this.localDetailsTab);
             this.tabContenidoDetalles.Controls.Add(this.tabModulos);
+            this.tabContenidoDetalles.Controls.Add(this.tabPageNetWorkInfo);
             this.tabContenidoDetalles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabContenidoDetalles.HotTrack = true;
             this.tabContenidoDetalles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -74,6 +78,60 @@
             this.localDetailsTab.TabIndex = 0;
             this.localDetailsTab.Text = "Local";
             // 
+            // richTextBoxErrorOutput
+            // 
+            this.richTextBoxErrorOutput.Enabled = false;
+            this.richTextBoxErrorOutput.Location = new System.Drawing.Point(271, 59);
+            this.richTextBoxErrorOutput.Name = "richTextBoxErrorOutput";
+            this.richTextBoxErrorOutput.Size = new System.Drawing.Size(238, 164);
+            this.richTextBoxErrorOutput.TabIndex = 9;
+            this.richTextBoxErrorOutput.Text = "--En desarrollo";
+            // 
+            // labelErrorOutput
+            // 
+            this.labelErrorOutput.AutoSize = true;
+            this.labelErrorOutput.Location = new System.Drawing.Point(268, 42);
+            this.labelErrorOutput.Name = "labelErrorOutput";
+            this.labelErrorOutput.Size = new System.Drawing.Size(70, 13);
+            this.labelErrorOutput.TabIndex = 8;
+            this.labelErrorOutput.Text = "Error Output :";
+            // 
+            // richTextBoxOutput
+            // 
+            this.richTextBoxOutput.Enabled = false;
+            this.richTextBoxOutput.Location = new System.Drawing.Point(14, 59);
+            this.richTextBoxOutput.Name = "richTextBoxOutput";
+            this.richTextBoxOutput.Size = new System.Drawing.Size(251, 164);
+            this.richTextBoxOutput.TabIndex = 7;
+            this.richTextBoxOutput.Text = "--En desarrollo";
+            // 
+            // labelOutput
+            // 
+            this.labelOutput.AutoSize = true;
+            this.labelOutput.Location = new System.Drawing.Point(11, 42);
+            this.labelOutput.Name = "labelOutput";
+            this.labelOutput.Size = new System.Drawing.Size(45, 13);
+            this.labelOutput.TabIndex = 6;
+            this.labelOutput.Text = "Output :";
+            // 
+            // labelHandlersData
+            // 
+            this.labelHandlersData.AutoSize = true;
+            this.labelHandlersData.Location = new System.Drawing.Point(91, 17);
+            this.labelHandlersData.Name = "labelHandlersData";
+            this.labelHandlersData.Size = new System.Drawing.Size(94, 13);
+            this.labelHandlersData.TabIndex = 5;
+            this.labelHandlersData.Text = "Handler Address : ";
+            // 
+            // labelBasePriorityData
+            // 
+            this.labelBasePriorityData.AutoSize = true;
+            this.labelBasePriorityData.Location = new System.Drawing.Point(11, 17);
+            this.labelBasePriorityData.Name = "labelBasePriorityData";
+            this.labelBasePriorityData.Size = new System.Drawing.Size(74, 13);
+            this.labelBasePriorityData.TabIndex = 3;
+            this.labelBasePriorityData.Text = "Base Priority : ";
+            // 
             // tabModulos
             // 
             this.tabModulos.Controls.Add(this.listViewModules);
@@ -85,60 +143,6 @@
             this.tabModulos.Text = "Modulos";
             this.tabModulos.UseVisualStyleBackColor = true;
             // 
-            // labelBasePriorityData
-            // 
-            this.labelBasePriorityData.AutoSize = true;
-            this.labelBasePriorityData.Location = new System.Drawing.Point(11, 17);
-            this.labelBasePriorityData.Name = "labelBasePriorityData";
-            this.labelBasePriorityData.Size = new System.Drawing.Size(74, 13);
-            this.labelBasePriorityData.TabIndex = 3;
-            this.labelBasePriorityData.Text = "Base Priority : ";
-            // 
-            // labelHandlersData
-            // 
-            this.labelHandlersData.AutoSize = true;
-            this.labelHandlersData.Location = new System.Drawing.Point(91, 17);
-            this.labelHandlersData.Name = "labelHandlersData";
-            this.labelHandlersData.Size = new System.Drawing.Size(94, 13);
-            this.labelHandlersData.TabIndex = 5;
-            this.labelHandlersData.Text = "Handler Address : ";
-            // 
-            // labelOutput
-            // 
-            this.labelOutput.AutoSize = true;
-            this.labelOutput.Location = new System.Drawing.Point(11, 42);
-            this.labelOutput.Name = "labelOutput";
-            this.labelOutput.Size = new System.Drawing.Size(45, 13);
-            this.labelOutput.TabIndex = 6;
-            this.labelOutput.Text = "Output :";
-            // 
-            // richTextBoxOutput
-            // 
-            this.richTextBoxOutput.Enabled = false;
-            this.richTextBoxOutput.Location = new System.Drawing.Point(14, 59);
-            this.richTextBoxOutput.Name = "richTextBoxOutput";
-            this.richTextBoxOutput.Size = new System.Drawing.Size(251, 164);
-            this.richTextBoxOutput.TabIndex = 7;
-            this.richTextBoxOutput.Text = "--En desarrollo";
-            // 
-            // labelErrorOutput
-            // 
-            this.labelErrorOutput.AutoSize = true;
-            this.labelErrorOutput.Location = new System.Drawing.Point(268, 42);
-            this.labelErrorOutput.Name = "labelErrorOutput";
-            this.labelErrorOutput.Size = new System.Drawing.Size(70, 13);
-            this.labelErrorOutput.TabIndex = 8;
-            this.labelErrorOutput.Text = "Error Output :";
-            // 
-            // richTextBoxErrorOutput
-            // 
-            this.richTextBoxErrorOutput.Enabled = false;
-            this.richTextBoxErrorOutput.Location = new System.Drawing.Point(271, 59);
-            this.richTextBoxErrorOutput.Name = "richTextBoxErrorOutput";
-            this.richTextBoxErrorOutput.Size = new System.Drawing.Size(238, 164);
-            this.richTextBoxErrorOutput.TabIndex = 9;
-            this.richTextBoxErrorOutput.Text = "--En desarrollo";
-            // 
             // listViewModules
             // 
             this.listViewModules.Location = new System.Drawing.Point(-4, 0);
@@ -147,6 +151,25 @@
             this.listViewModules.TabIndex = 0;
             this.listViewModules.UseCompatibleStateImageBehavior = false;
             this.listViewModules.View = System.Windows.Forms.View.Details;
+            // 
+            // tabPageNetWorkInfo
+            // 
+            this.tabPageNetWorkInfo.Controls.Add(this.listViewNetwork);
+            this.tabPageNetWorkInfo.Location = new System.Drawing.Point(4, 22);
+            this.tabPageNetWorkInfo.Name = "tabPageNetWorkInfo";
+            this.tabPageNetWorkInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageNetWorkInfo.Size = new System.Drawing.Size(509, 233);
+            this.tabPageNetWorkInfo.TabIndex = 2;
+            this.tabPageNetWorkInfo.Text = "Network";
+            this.tabPageNetWorkInfo.UseVisualStyleBackColor = true;
+            // 
+            // listViewNetwork
+            // 
+            this.listViewNetwork.Location = new System.Drawing.Point(0, 0);
+            this.listViewNetwork.Name = "listViewNetwork";
+            this.listViewNetwork.Size = new System.Drawing.Size(513, 237);
+            this.listViewNetwork.TabIndex = 0;
+            this.listViewNetwork.UseCompatibleStateImageBehavior = false;
             // 
             // DetallesProcessForm
             // 
@@ -161,6 +184,7 @@
             this.localDetailsTab.ResumeLayout(false);
             this.localDetailsTab.PerformLayout();
             this.tabModulos.ResumeLayout(false);
+            this.tabPageNetWorkInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -176,5 +200,7 @@
         private System.Windows.Forms.RichTextBox richTextBoxErrorOutput;
         private System.Windows.Forms.Label labelErrorOutput;
         private System.Windows.Forms.ListView listViewModules;
+        private System.Windows.Forms.TabPage tabPageNetWorkInfo;
+        private System.Windows.Forms.ListView listViewNetwork;
     }
 }
