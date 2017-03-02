@@ -1,0 +1,5 @@
+﻿  ReadingMemory.cpp
+d:\mis documentos\documentos\visual studio 2015\projects\readingmemory\readingmemory\readingmemory.cpp(82): warning C4312: 'type cast': conversion from 'DWORD' to 'LPVOID' of greater size
+d:\mis documentos\documentos\visual studio 2015\projects\readingmemory\readingmemory\readingmemory.cpp(84): warning C4102: 'std': unreferenced label
+  ReadingMemory.vcxproj -> d:\mis documentos\documentos\visual studio 2015\Projects\ReadingMemory\x64\Debug\ReadingMemory.exe
+  ReadingMemory.vcxproj -> d:\mis documentos\documentos\visual studio 2015\Projects\ReadingMemory\x64\Debug\ReadingMemory.pdb (Full PDB)

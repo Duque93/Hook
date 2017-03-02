@@ -33,60 +33,17 @@ namespace OverlayDrawingTest
         private OverlayForm overlayDebugging = null;
         private ProcessListForm listaProcesosForm = null;
 
-        private List<IComunicator> chivatoHijos = null;
+        //private List<IComunicator> chivatoHijos = null;
+        public event EventHandler onChildClose;
         private IntPtr handlerFounded = IntPtr.Zero;
         private KeyBoardHook hookTeclado = null;
         private MouseHook hookRaton = null;
 
         #endregion Parameters
 
-        #region EventsListener
-        private class Comunicator : IComunicator
-        {
-            private Formulario self;
-            private static IComunicator instance;
-
-            /// <summary>
-            /// Crea un nuevo segmento en la memoria si la instancia del objeto no ha sido creado anteriormente.
-            /// Sino devuelve siempre la misma isntancia para evitar reservar mas memoria.
-            /// </summary>
-            /// <param name="formulario">Formulario a la que se le chivara los cambios de estado de OverlayForm</param>
-            /// <returns>IFormListener</returns>
-            public static IComunicator getInstance(Formulario formulario, bool nuevo)
-            {
-                if (instance == null)
-                {
-                    instance = new Comunicator(formulario);
-                    return instance;
-                }
-                else
-                {
-                    return instance;
-                }
-            }
-            
-            private Comunicator(Formulario formulario)
-            {
-                self = formulario;
-            }
-
-            //////////////////////////////////////////////////////////////////////
-            // Implementando metodos 
-
-            public void closingWindow()
-            {
-                self.checkBoxOverlay.Checked = false;
-            }
-            //FIN Implementacion
-            //////////////////////////////////////////////////////////////////////
-        }
-
-
-        #endregion EventsListener
-
         #region Hooks
 
-        #region KeyBoardEventsListener
+            #region KeyBoardEventsListener
         private class KeyBoardEventsListener : IKeyBoardEventsListener
         {
             private Formulario self;
@@ -126,7 +83,7 @@ namespace OverlayDrawingTest
         }
         #endregion KeyBoardEventsListener
 
-        #region MouseEventsListener
+            #region MouseEventsListener
 
         private class MouseEventListener : IMouseEventsListener
         {

@@ -54,6 +54,7 @@
             this.Name = "ProcessListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProcessListForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProcessListForm_FormClosed);
             this.Load += new System.EventHandler(this.ProcessListForm_Load);
             this.SizeChanged += new System.EventHandler(this.ProcessListForm_SizeChanged);
             this.ResumeLayout(false);

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Forms;
 
 namespace OverlayDrawingTest
 {
@@ -15,7 +16,7 @@ namespace OverlayDrawingTest
 
         public Formulario()
         {
-            chivatoHijos = new List<IComunicator>();
+            //chivatoHijos = new List<IComunicator>();
             InitializeComponent();
         }
 
@@ -24,9 +25,11 @@ namespace OverlayDrawingTest
         private void initOverlay()
         {
 
-            IComunicator chivato = Comunicator.getInstance(this, true);
-            chivatoHijos.Add(chivato);
-            overlayProcess = new OverlayForm(chivato, handlerFounded);
+            //IComunicator chivato = Comunicator.getInstance(this, true);
+            //chivatoHijos.Add(chivato);
+            onChildClose += new System.EventHandler(
+                (object sender, EventArgs e) => { this.checkBoxOverlay.Checked = false; });
+            overlayProcess = new OverlayForm(onChildClose, handlerFounded);
             overlayProcess.init();
         }
         private void init()
@@ -40,7 +43,9 @@ namespace OverlayDrawingTest
             IMouseEventsListener escuchadorRaton = MouseEventListener.getInstance(this);
             hookRaton =  MouseHook.getInstance(escuchadorRaton);
 
-            listaProcesosForm = new WindowsFormsApplication1.Forms.ProcessListForm();
+            onChildClose += new System.EventHandler(
+                (object sender, EventArgs e) => { this.Close(); });
+            listaProcesosForm = new ProcessListForm(onChildClose);
             //listaProcesosForm.Show();
             /*
             foreach ( Process proc in Process.GetProcesses() ){

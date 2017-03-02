@@ -35,7 +35,7 @@ namespace OverlayDrawingTest
 
         delegate void SetIntsCallback(int top, int left); //Necesario para la modificacion de parametros atraves de distintos hilos
 
-        IComunicator chivatoPadre = null;
+        EventHandler onClose = null;
         IntPtr handlerTarget = IntPtr.Zero;
         RECT windowTargetRect;
         RECT ctrlTargetRect {

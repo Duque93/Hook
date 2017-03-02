@@ -16,12 +16,11 @@ namespace OverlayDrawingTest
         /// 
         /// </summary>
         /// <param name="listener">Se ocupara de informar al padre de los cambios de estado en el overlay</param>
-        public OverlayForm(IComunicator chivatoPadre, IntPtr handlerTarget)
+        public OverlayForm(EventHandler onClose, IntPtr handlerTarget)
         {
             InitializeComponent();
-            this.chivatoPadre = chivatoPadre;
+            this.onClose = onClose;
             this.handlerTarget = handlerTarget;
-            
         }
 
         #region Methods
@@ -115,10 +114,10 @@ namespace OverlayDrawingTest
 
         }
 
-        private void Overlay_FormClosing(object sender, FormClosingEventArgs e)
+        public void Overlay_FormClosing(object sender, FormClosingEventArgs e)
         {
             working = false;
-            chivatoPadre.closingWindow();
+            this.onClose(sender, e);
         }
 
         private void OverlayForm_Paint(object sender, PaintEventArgs e)
